@@ -1,15 +1,15 @@
 {
-  "name": "gcp-cloudfunction-build-git-trigger",
+  "name": "gcp-cloudfunction-git-event",
   "version": "0.1.0",
-  "description": "Google Cloud Function to deploy new software using Cloud Build, responding to Git repository events",
+  "description": "Google Cloud Function to be triggered on Git repository events",
   "license": "MIT",
-  "homepage": "https://github.com/ricardolsmendes/gcp-cloudfunction-build-git-trigger#readme",
+  "homepage": "https://github.com/ricardolsmendes/gcp-cloudfunction-git-event#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ricardolsmendes/gcp-cloudfunction-build-git-trigger.git"
+    "url": "git+https://github.com/ricardolsmendes/gcp-cloudfunction-git-event.git"
   },
   "bugs": {
-    "url": "https://github.com/ricardolsmendes/gcp-cloudfunction-build-git-trigger/issues"
+    "url": "https://github.com/ricardolsmendes/gcp-cloudfunction-git-event/issues"
   },
   "author": "Ricardo Mendes <ricardolsmendes@gmail.com>",
   "main": "./index.js",
