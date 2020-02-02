@@ -1,5 +1,7 @@
 'use strict';
 
+const jp = require('jsonpath');
+
 const { CloudBuildClient } = require('@google-cloud/cloudbuild');
 
 const build = Object.create();
@@ -31,14 +33,14 @@ build.steps = [{
   name: 'gcr.io/cloud-builders/git',
   args: [
     'clone',
-    '--depth', '1',
-    process.env.GIT_REPOSITORY_HTTP_ADDRESS
+    '--depth', '1'
   ]
 }, {
   name: 'gcr.io/cloud-builders/gcloud',
   args: [
     'builds',
     'submit',
+    '--config', process.env.CLOUD_BUILD_CONFIG_FILE,
     '.'
   ]
 }];
@@ -49,15 +51,31 @@ build.steps = [{
  * @param {object} req The HTTP request.
  * @param {object} res The HTTP response.
  */
-exports.get = async (req, res) => {
+exports.triggerBuild = async (req, res) => {
 
-  const cloudBuild = new CloudBuildClient();
+  console.log('>> Starting to handle request:');
+  console.log(req);
+
+  // TODO: Validate Secret Token
+
+  const repositoryUrl = process.env.GIT_REPOSITORY_URL ?
+    process.env.GIT_REPOSITORY_URL :
+    jp.value(req, process.env.GIT_REPOSITORY_URL_REQUEST_PATH);
+
+  // Append the repository url to the `git clone` command.
+  build.steps[3].args.push(repositoryUrl);
 
   const createBuildRequest = {
     build: build
   };
 
-  await cloudBuild.createBuild(createBuildRequest);
+  console.log(' . creating build');
+  const [createBuildResponse] = await new CloudBuildClient()
+    .createBuild(createBuildRequest);
+
+  console.log('>> BUILD CREATED!');
+  console.log(' > response:');
+  console.log(createBuildResponse);
 
   res.status(200).send('Build successfully triggered!');
 };
