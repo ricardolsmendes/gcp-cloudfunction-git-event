@@ -23,7 +23,7 @@ describe('triggerBuild', () => {
 
   beforeEach(() => {
     createBuildStub = sinon.stub(CloudBuildClient.prototype, 'createBuild').resolves([
-      { id: 'Test Build' }
+      { metadata: { build: { id: 'Test Build' } } }
     ]);
   });
 
@@ -49,7 +49,7 @@ describe('triggerBuild', () => {
     const req = {
       body: {
         repository: {
-          git_http_url: 'http://example.com/user/test.git',
+          git_http_url: 'http://example.com/user/test.git'
         }
       },
       get: sinon.stub().returns('testAuthHeaderValue')

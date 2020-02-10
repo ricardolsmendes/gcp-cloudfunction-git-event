@@ -3,7 +3,7 @@
 
   "check-coverage": true,
   "functions": 95,
-  "lines": 84,
+  "lines": 80,
 
   "reporter": ["html", "text"]
 }

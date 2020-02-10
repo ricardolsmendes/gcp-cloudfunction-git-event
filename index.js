@@ -13,7 +13,6 @@ const { CloudBuildClient } = require('@google-cloud/cloudbuild');
 exports.triggerBuild = async (req, res) => {
 
   console.log('>> Starting to handle request:');
-  console.log(req);
 
   // Authorize the request through a specific header.
   const authHeaderName = process.env.AUTH_HEADER_NAME;
@@ -34,11 +33,10 @@ exports.triggerBuild = async (req, res) => {
   const repositoryUrl = repositoryUrlRequestPath ?
     jp.value(req.body, repositoryUrlRequestPath) : process.env.GIT_REPOSITORY_URL;
 
-  // Make the Cloud Build specificagion object.
-  const build = makeBuildSpecification(repositoryUrl);
-
+  // Create the master Cloud Build request.
   const createBuildRequest = {
-    build: build
+    projectId: process.env.CLOUD_BUILD_PROJECT_ID,
+    build: makeBuildSpecification(repositoryUrl)
   };
 
   console.log(' . creating build');
@@ -46,8 +44,7 @@ exports.triggerBuild = async (req, res) => {
     .createBuild(createBuildRequest);
 
   console.log('>> BUILD CREATED!');
-  console.log(' > response:');
-  console.log(createBuildResponse);
+  console.log(`>> ID: ${createBuildResponse.metadata.build.id}`);
 
   res.status(200).send('Build successfully triggered!');
 };
@@ -58,12 +55,16 @@ function makeBuildSpecification(repositoryUrl) {
 
   buildSpec.steps = [{
     name: 'gcr.io/cloud-builders/gcloud',
+    entrypoint: '/bin/bash',
     args: [
-      'beta',
-      'secrets',
-      'versions', 'access', process.env.SECRET_VERSION,
-      '--secret', process.env.SECRET_NAME,
-      '>', '.git-credentials'
+      '-c',
+      [
+        'gcloud beta',
+        'secrets',
+        `versions access ${process.env.SECRET_VERSION}`,
+        `--secret ${process.env.SECRET_NAME}`,
+        '> .git-credentials'
+      ].join(' ')
     ]
   }, {
     name: 'gcr.io/cloud-builders/git',
