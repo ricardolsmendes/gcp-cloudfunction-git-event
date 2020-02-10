@@ -1,0 +1,9 @@
+{
+  "all": true,
+
+  "check-coverage": true,
+  "functions": 95,
+  "lines": 84,
+
+  "reporter": ["html", "text"]
+}
