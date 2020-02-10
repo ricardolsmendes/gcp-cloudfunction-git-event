@@ -59,6 +59,7 @@ function makeBuildSpecification(repositoryUrl) {
     args: [
       '-c',
       [
+        'gcloud components update &&',
         'gcloud beta',
         'secrets',
         `versions access ${process.env.SECRET_VERSION}`,
