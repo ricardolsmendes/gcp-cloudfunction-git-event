@@ -32,9 +32,9 @@ The environment variables listed below are used by the function:
 | ---- | ----------- | --------- |
 | AUTH_HEADER_NAME | Name of the HTTP header that nust be provided to authorize the request. | Y |
 | AUTH_HEADER_VALUE | Value of the HTTP header that nust be provided to authorize the request. | Y |
-| CLOUD_BUILD_CONFIG_FILE | The __Cloud Build__ configuration file; defaults to `cloudbuild.yaml`. | N |
-| CLOUD_BUILD_PROJECT_ID | Id of a project to host the __Cloud Build__ operatons. | N |
-| CLOUD_BUILD_SUBSTITUTIONS | Parameters to be substituted in the build specification, in the format of `_SAMPLE_VALUE=blue,_OTHER_VALUE=10` ([build-requests#substitutions][12] for reference). | Y |
+| CLOUDBUILD_CONFIG_FILE | The __Cloud Build__ configuration file; defaults to `cloudbuild.yaml`. | N |
+| CLOUDBUILD_PROJECT_ID | Id of a project to host the __Cloud Build__ operatons. | N |
+| CLOUDBUILD_SUBSTITUTIONS | Parameters to be substituted in the build specification, in the format of `_SAMPLE_VALUE=blue,_OTHER_VALUE=10` ([build-requests#substitutions][12] for reference). | Y |
 | GIT_REPOSITORY_URL | URL of the repository to be cloned; must be provided if `GIT_REPOSITORY_URL_REQUEST_PATH` is not present. | N |
 | GIT_REPOSITORY_URL_REQUEST_PATH | JSON path to extract the URL of the repository from the request body; takes priority over `GIT_REPOSITORY_URL`. | N |
 | SECRET_NAME | Name of the secret used to store Git credentials in __Secret Manager__. | Y |

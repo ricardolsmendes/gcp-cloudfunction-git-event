@@ -35,7 +35,7 @@ exports.triggerBuild = async (req, res) => {
 
   // Create the master Cloud Build request.
   const createBuildRequest = {
-    projectId: process.env.CLOUD_BUILD_PROJECT_ID,
+    projectId: process.env.CLOUDBUILD_PROJECT_ID,
     build: makeBuildSpecification(repositoryUrl)
   };
 
@@ -90,8 +90,8 @@ function makeBuildSpecification(repositoryUrl) {
       'submit',
       './git-contents',
       '--config',
-      `./git-contents/${process.env.CLOUD_BUILD_CONFIG_FILE || 'cloudbuild.yaml'}`,
-      '--substitutions', process.env.CLOUD_BUILD_SUBSTITUTIONS
+      `./git-contents/${process.env.CLOUDBUILD_CONFIG_FILE || 'cloudbuild.yaml'}`,
+      '--substitutions', process.env.CLOUDBUILD_SUBSTITUTIONS
     ]
   }];
 
