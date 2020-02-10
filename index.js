@@ -59,8 +59,8 @@ function makeBuildSpecification(repositoryUrl) {
     args: [
       '-c',
       [
-        'gcloud components update &&',
-        'gcloud beta',
+        'gcloud components update &&', // TODO: remove after gcr.io/cloud-builders/gcloud update...
+        'gcloud beta', // TODO: remove `beta` after the service turns GA...
         'secrets',
         `versions access ${process.env.SECRET_VERSION}`,
         `--secret ${process.env.SECRET_NAME}`,
