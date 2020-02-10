@@ -11,8 +11,11 @@ that are not connectable through __[Source Repositories][7]__, such as __GitLab_
 hosted ones.
 
 Present work is based on GitLab's [Joshua Lambert][8] enlightening __[cloud-function-trigger][9]__,
-adjusted to use __[Secret Manager][10]__ instead of __[KMS][11]__, leverage environment variables,
-and trigger two __Cloud Build__ jobs, what makes it more flexible.
+with some adjustments to make it more flexible:
+
+1. leverage __Cloud Function__ environment variables;
+1. use __[Secret Manager][10]__ instead of __[KMS][11]__;
+1. trigger parent and child __Cloud Build__ jobs.
 
 _P.S.: The git repository must support webhooks or similar technology to call this function._
 
