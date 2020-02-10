@@ -72,21 +72,25 @@ function makeBuildSpecification(repositoryUrl) {
     args: [
       'config',
       '--global', 'credential.helper', '\'store\''
-    ]
+    ],
+    env: ['HOME=/workspace']
   }, {
     name: 'gcr.io/cloud-builders/git',
     args: [
       'clone',
       '--depth', '1',
-      repositoryUrl
-    ]
+      repositoryUrl,
+      './git-contents'
+    ],
+    env: ['HOME=/workspace']
   }, {
     name: 'gcr.io/cloud-builders/gcloud',
     args: [
       'builds',
       'submit',
-      '.',
-      '--config', process.env.CLOUD_BUILD_CONFIG_FILE || 'cloudbuild.yaml',
+      './git-contents',
+      '--config',
+      `./git-contents/${process.env.CLOUD_BUILD_CONFIG_FILE || 'cloudbuild.yaml'}`,
       '--substitutions', process.env.CLOUD_BUILD_SUBSTITUTIONS
     ]
   }];
