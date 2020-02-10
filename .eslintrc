@@ -1,0 +1,31 @@
+{
+  "extends": "standard",
+  "rules": {
+    ////////// Stylistic Issues //////////
+    "eol-last": ["error", "always"], // enforce at least one newline at the end of non-empty files
+    "indent": ["error", 2], // consistent indentation
+    "lines-between-class-members": ["error", "always", { // enforce lines between class members
+      "exceptAfterSingleLine": true
+    }],
+    "max-len": ["error", {
+      "code": 100 // a maximum line length to increase code readability and maintainability
+    }],
+    "operator-linebreak": 0, // consistent linebreak style for operators
+    "padded-blocks": ["error", { // enforce padding within blocks (off by default)
+      "classes": "always"
+    }],
+    "quotes": ["error", "single", { // consistent use of either backticks, double, or single quotes
+      "allowTemplateLiterals": true,
+      "avoidEscape": true
+    }],
+    "semi": ["error", "always"], // require semicolons instead of ASI
+    "space-before-function-paren": ["error", { // consistent spacing before function parentheses
+      "anonymous": "never",
+      "named": "never",
+      "asyncArrow": "always"
+    }],
+
+    ////////// Variables //////////
+    "no-undef": "off" // disallow use of undeclared variables unless mentioned in a global block
+  }
+}
