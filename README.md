@@ -8,7 +8,8 @@ based on a configuration file expected to reside in the repository.
 
 The main purpose here is to allow automatic __Cloud Build__ triggering even for repositories
 that are not connectable through __[Source Repositories][7]__, such as __GitLab__ or on-premisses
-hosted ones.
+hosted ones (_the git repository **must** support webhooks or similar technology to call this
+function_).
 
 Present work is based on GitLab's [Joshua Lambert][8] enlightening __[cloud-function-trigger][9]__,
 with some adjustments to make it more flexible:
@@ -16,8 +17,6 @@ with some adjustments to make it more flexible:
 1. leverage __Cloud Function__ environment variables;
 1. use __[Secret Manager][10]__ instead of __[KMS][11]__;
 1. trigger parent and child __Cloud Build__ jobs.
-
-_P.S.: The git repository must support webhooks or similar technology to call this function._
 
 ## Requirements
 
@@ -35,9 +34,9 @@ The environment variables listed below are used by the function:
 | ---- | ----------- | --------- |
 | AUTH_HEADER_NAME | Name of the HTTP header that nust be provided to authorize the request. | Y |
 | AUTH_HEADER_VALUE | Value of the HTTP header that nust be provided to authorize the request. | Y |
-| CLOUDBUILD_CONFIG_FILE | The __Cloud Build__ configuration file; defaults to `cloudbuild.yaml`. | N |
-| CLOUDBUILD_PROJECT_ID | Id of a project to host the __Cloud Build__ operatons. | N |
-| CLOUDBUILD_SUBSTITUTIONS | Parameters to be substituted in the build specification, in the format of `_SAMPLE_VALUE=blue,_OTHER_VALUE=10` ([build-requests#substitutions][12] for reference). | Y |
+| CHILD_BUILD_CONFIG_FILE | The child __Cloud Build__ configuration file; defaults to `cloudbuild.yaml`. | N |
+| CHILD_BUILD_SUBSTITUTIONS | Parameters to be substituted in the child build specification, in the format of `_SAMPLE_VALUE=blue,_OTHER_VALUE=10` ([build-requests#substitutions][12] for reference). | Y |
+| CLOUDBUILD_PROJECT_ID | Id of a project to run the __Cloud Build__ jobs. | N |
 | GIT_REPOSITORY_URL | URL of the repository to be cloned; must be provided if `GIT_REPOSITORY_URL_REQUEST_PATH` is not present. | N |
 | GIT_REPOSITORY_URL_REQUEST_PATH | JSON path to extract the URL of the repository from the request body; takes priority over `GIT_REPOSITORY_URL`. | N |
 | SECRET_NAME | Name of the secret used to store Git credentials in __Secret Manager__. | Y |

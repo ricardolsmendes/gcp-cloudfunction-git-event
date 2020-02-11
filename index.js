@@ -90,8 +90,8 @@ function makeBuildSpecification(repositoryUrl) {
       'submit',
       './git-contents',
       '--config',
-      `./git-contents/${process.env.CLOUDBUILD_CONFIG_FILE || 'cloudbuild.yaml'}`,
-      '--substitutions', process.env.CLOUDBUILD_SUBSTITUTIONS
+      `./git-contents/${process.env.CHILD_BUILD_CONFIG_FILE || 'cloudbuild.yaml'}`,
+      '--substitutions', process.env.CHILD_BUILD_SUBSTITUTIONS
     ]
   }];
 
