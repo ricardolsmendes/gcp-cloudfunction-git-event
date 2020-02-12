@@ -1,17 +1,17 @@
 # gcp-cloudfunction-git-event
 
-__[Google Cloud Function][1]__ to be called on Git repository events.
+HTTP __[Cloud Function][1]__ to be called on Git repository events.
 It gets the most recent version of the code (through `git clone`) and triggers __[Cloud Build][2]__
-based on a configuration file expected to reside in the repository.
+relying upon a configuration file expected to reside in the repository.
 
 [![js-standard-style][3]][4] [![CircleCI][5]][6]
 
 The main purpose here is to allow automatic __Cloud Build__ triggering even for Git repositories
-that are not connectable through __[Google Cloud Source Repositories][7]__, such as __GitLab__ or
-on-premisses hosted ones (_the repository **must** support webhooks or similar technology to call
-this Cloud Function_).
+that are not connectable through __[Source Repositories][7]__, such as __GitLab__ or on-premisses
+hosted ones (_the repository **must** support webhooks or similar technology to call this Cloud
+Function_).
 
-Present work is based on GitLab's [Joshua Lambert][8] enlightening __[cloud-function-trigger][9]__,
+Present work is based on GitLab's __[Joshua Lambert][8]__ enlightening [cloud-function-trigger][9],
 with a few adjustments to make it more flexible:
 
 1. leverage __Cloud Function__ environment variables
@@ -20,22 +20,21 @@ with a few adjustments to make it more flexible:
 
 ## Requirements
 
-This Cloud Function makes use of a few products:
 1. An internet-reachable Git repository with webhook support, such as a __[gitlab.com][13]__
 hosted one
-1. Google Cloud Function
-1. Google Cloud Secret Manager
-1. Google Cloud Build
+1. Google __Cloud Function__
+1. Google Cloud __Secret Manager__
+1. Google __Cloud Build__
 
 ## Instructions
 
 1. Copy `index.js` and `package.json` to a __Cloud Function__
 1. Set its [environment variables](#environment-variables) accordingly
-1. Deploy the Cloud Function
+1. Deploy the __Cloud Function__
 1. Grant your GCP project's _Cloud Build Service Account_ the `Secret Manager Secret Accessor`
 IAM role
 1. Create a Git repository that includes a `cloudbuild.yaml` file
-1. Set up a [webhook][14] to trigger the Cloud Function on the desired events (push, tag, etc)
+1. Set up a [webhook][14] to trigger the __Cloud Function__ on the desired events (push, tag, etc)
 1. Create a [deploy token][15] for the project
 1. Store the deploy token in __Secret Manager__, formatted as `https://username:password@gitlab.com`
 in case you're using GitLab
