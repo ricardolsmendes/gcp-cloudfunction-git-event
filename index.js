@@ -12,26 +12,23 @@ const { CloudBuildClient } = require('@google-cloud/cloudbuild');
  */
 exports.triggerBuild = async (req, res) => {
 
-  console.log('>> Starting to handle request:');
+  console.log('>> Starting to handle a request...');
 
-  // Authorize the request through a specific header.
-  const authHeaderName = process.env.AUTH_HEADER_NAME;
-  const expectedAuthHeaderValue = process.env.AUTH_HEADER_VALUE;
-  const providedAuthHeaderValue = req.get(authHeaderName);
-  if (providedAuthHeaderValue !== expectedAuthHeaderValue) {
-    const errorMessage = [
-      'Unauthorized request!',
-      `Invalid ${process.env.AUTH_HEADER_KEY} header value: ${providedAuthHeaderValue}.`
-    ].join(' ');
+  // Extract authorization credentials from a specific HTTP header.
+  const { AUTH_HEADER_NAME } = process.env;
+  const { AUTH_HEADER_VALUE } = process.env;
+  const providedCredentials = req.get(AUTH_HEADER_NAME);
+  if (!providedCredentials || providedCredentials !== AUTH_HEADER_VALUE) {
+    const errorMessage = `Unauthorized request! Invalid ${AUTH_HEADER_NAME} header value.`;
     console.log(`ERROR: ${errorMessage}`);
     res.status(401).send(errorMessage);
     return;
   }
 
   // Extract repository url from the request body or environment variable.
-  const repositoryUrlRequestPath = process.env.GIT_REPOSITORY_URL_REQUEST_PATH;
-  const repositoryUrl = repositoryUrlRequestPath ?
-    jp.value(req.body, repositoryUrlRequestPath) : process.env.GIT_REPOSITORY_URL;
+  const { GIT_REPOSITORY_URL_REQUEST_PATH } = process.env;
+  const repositoryUrl = GIT_REPOSITORY_URL_REQUEST_PATH ?
+    jp.value(req.body, GIT_REPOSITORY_URL_REQUEST_PATH) : process.env.GIT_REPOSITORY_URL;
 
   // Create the master Cloud Build request.
   const createBuildRequest = {
