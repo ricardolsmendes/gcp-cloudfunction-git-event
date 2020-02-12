@@ -26,19 +26,18 @@ hosted one
 1. Google Cloud __Secret Manager__
 1. Google __Cloud Build__
 
-## Instructions
+## Instructions for GitLab
 
-1. Copy `index.js` and `package.json` to a __Cloud Function__
-1. Set its [environment variables](#environment-variables) accordingly
-1. Deploy the __Cloud Function__
+1. Create a Git repository that includes a `cloudbuild.yaml` file
+1. Create a [deploy token][14] for the project
+1. Store the token in __Secret Manager__, formatted as `https://username:password@gitlab.com`
 1. Grant your GCP project's _Cloud Build Service Account_ the `Secret Manager Secret Accessor`
 IAM role
-1. Create a Git repository that includes a `cloudbuild.yaml` file
-1. Set up a [webhook][14] to trigger the __Cloud Function__ on the desired events (push, tag, etc)
-1. Create a [deploy token][15] for the project
-1. Store the deploy token in __Secret Manager__, formatted as `https://username:password@gitlab.com`
-in case you're using GitLab
-1. Push some code to the repository created in step 5 and _voilà_!
+1. Copy `index.js` and `package.json` to a __Cloud Function__
+1. Set function's [environment variables](#environment-variables)
+1. Deploy the __Cloud Function__
+1. Set up a [webhook][15] to trigger the __Cloud Function__ on the desired events (push, tag, etc)
+1. Push some code to the repository created in step 1 and _voilà_!
 
 ## Environment variables
 
@@ -69,5 +68,5 @@ The environment variables listed below are used by the function:
 [11]: https://cloud.google.com/kms/
 [12]: https://cloud.google.com/cloud-build/docs/build-config#substitutions
 [13]: https://gitlab.com
-[14]: https://docs.gitlab.com/ee/user/project/integrations/webhooks.html
-[15]: https://docs.gitlab.com/ee/user/project/deploy_tokens/
+[14]: https://docs.gitlab.com/ee/user/project/deploy_tokens/
+[15]: https://docs.gitlab.com/ee/user/project/integrations/webhooks.html
