@@ -43,17 +43,17 @@ IAM role
 
 The environment variables listed below are used by the function:
 
-| NAME | DESCRIPTION | MANDATORY |
-| ---- | ----------- | --------- |
-| AUTH_HEADER_NAME | Name of the HTTP header that must be provided to authorize the request. | Y |
-| AUTH_HEADER_VALUE | Value of the HTTP header that must be provided to authorize the request. | Y |
-| CHILD_BUILD_CONFIG_FILE | The _child build_ configuration file; defaults to `cloudbuild.yaml`. | N |
-| CHILD_BUILD_SUBSTITUTIONS | Parameters to be substituted in the _child build_ specification, in the format of `_SAMPLE_VALUE=blue,_OTHER_VALUE=10` ([build configuration overview][12] for reference). | Y |
-| CLOUDBUILD_PROJECT_ID | Id of a project to run the __Cloud Build__ jobs. | N |
-| GIT_REPOSITORY_URL | URL of the repository to be cloned; must be provided if `GIT_REPOSITORY_URL_REQUEST_PATH` is not present. | N |
-| GIT_REPOSITORY_URL_REQUEST_PATH | JSON path to extract the URL of the repository from the request body; takes priority over `GIT_REPOSITORY_URL`. | N |
-| SECRET_NAME | Name of the secret used to store Git credentials in __Secret Manager__. | Y |
-| SECRET_VERSION | Version of the secret used to store Git credentials in __Secret Manager__. | Y |
+| NAME                            | DESCRIPTION                                                                                                                                                                | MANDATORY |
+| ------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------: |
+| AUTH_HEADER_NAME                | Name of the HTTP header that must be provided to authorize the request.                                                                                                    |    Yes    |
+| AUTH_HEADER_VALUE               | Value of the HTTP header that must be provided to authorize the request.                                                                                                   |    Yes    |
+| CHILD_BUILD_CONFIG_FILE         | The _child build_ configuration file; defaults to `cloudbuild.yaml`.                                                                                                       |    No     |
+| CHILD_BUILD_SUBSTITUTIONS       | Parameters to be substituted in the _child build_ specification, in the format of `_SAMPLE_VALUE=blue,_OTHER_VALUE=10` ([build configuration overview][12] for reference). |    Yes    |
+| CLOUDBUILD_PROJECT_ID           | Id of a project to run the __Cloud Build__ jobs.                                                                                                                           |    No     |
+| GIT_REPOSITORY_URL              | URL of the repository to be cloned; must be provided if `GIT_REPOSITORY_URL_REQUEST_PATH` is not present.                                                                  |    No     |
+| GIT_REPOSITORY_URL_REQUEST_PATH | JSON path to extract the URL of the repository from the request body; takes priority over `GIT_REPOSITORY_URL`.                                                            |    No     |
+| SECRET_NAME                     | Name of the secret used to store Git credentials in __Secret Manager__.                                                                                                    |    Yes    |
+| SECRET_VERSION                  | Version of the secret used to store Git credentials in __Secret Manager__.                                                                                                 |    No     |
 
 [1]: https://cloud.google.com/functions/
 [2]: https://cloud.google.com/cloud-build/
