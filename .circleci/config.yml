@@ -15,7 +15,7 @@ jobs:
 
       - run:
           name: Update npm
-          command: sudo npm install -g npm@latest
+          command: sudo npm install -g npm@6.14.15
 
       - restore_cache: # Download and cache dependencies.
           key: dependency-cache-{{ checksum "package-lock.json" }}
