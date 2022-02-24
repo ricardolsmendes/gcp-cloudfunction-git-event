@@ -14,8 +14,8 @@ describe('triggerBuild', () => {
     send: sinon.stub()
   };
 
-  var consoleLogStub;
-  var createBuildStub;
+  let consoleLogStub;
+  let createBuildStub;
 
   before(() => {
     consoleLogStub = sinon.stub(console, 'log');
