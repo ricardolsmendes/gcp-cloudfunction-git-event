@@ -28,7 +28,8 @@ exports.triggerBuild = async (req, res) => {
   // Extract repository url from the request body or environment variable.
   const { GIT_REPOSITORY_URL_REQUEST_PATH } = process.env;
   const repositoryUrl = GIT_REPOSITORY_URL_REQUEST_PATH ?
-    jp.value(req.body, GIT_REPOSITORY_URL_REQUEST_PATH) : process.env.GIT_REPOSITORY_URL;
+    jp.value(req.body, GIT_REPOSITORY_URL_REQUEST_PATH) :
+    process.env.GIT_REPOSITORY_URL;
 
   // Create the master Cloud Build request.
   const createBuildRequest = {
