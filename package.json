@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@google-cloud/cloudbuild": "^4.4.0",
-    "jsonpath": "^1.2.0"
+    "jsonpath": "^1.2.1"
   },
   "devDependencies": {
     "eslint": "^7.12.1",
